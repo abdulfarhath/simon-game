@@ -10,7 +10,7 @@ let btns = document.querySelectorAll(".btn");
 let resetbtn = document.querySelector(".resetbtn");
 let closeButton = document.getElementById("closebtn");
 let popup = document.getElementById("myPopup");
-let overlay = document.getElementById("overlay");
+let overlay = document.getElementById("popup");
 
 gameBegin(0);
 
@@ -20,7 +20,7 @@ function gameBegin(newlevel) {
     }
     clickedArr = [];
     lvl = newlevel + 1;
-    h2.innerText = level ${lvl};
+    h2.innerText = `level ${lvl}`;
     console.log("level ", lvl);
     isgamestarted = true;
     let randno = Math.floor(Math.random() * 4) + 1;
@@ -39,17 +39,24 @@ function clickAction() {
 }
 
 function showPopup() {
-    overlay.style.display = "block";
+    // overlay.style.display = "block";
     setTimeout(() => {
       closePopup();
     }, 2000);
 }
 
 function closePopup() {
-    overlay.style.display = "none";
+    closeButton.addEventListener("click", closehandler);
+}
+
+function closehandler(){
+    // popup.style.display = "none";
+    popup.innerHTML = "";
+    popup.classList.remove("popuptext")
+    // popup.classList.add("nocss");
     console.log("button clicked");
 }
-closeButton.addEventListener("click", closePopup);
+
 
 window.addEventListener("keydown", function(event) {
   if (event.key === "Escape") {
@@ -97,7 +104,7 @@ function clickhandler(evt) {
                 count++;
             } else {
                 console.log("game over");
-                h2.innerText = You Lost in level ${lvl};
+                h2.innerText = `You Lost in level ${lvl}`;
                 document.body.style.backgroundColor = "red";
                 setTimeout(() => {
                     document.body.style.backgroundColor = "#323232";
@@ -124,7 +131,7 @@ function clickhandler(evt) {
 }
 
 function flash(delay, clr, x) {
-    let flashbtn = document.getElementById(${x});
+    let flashbtn = document.getElementById(`${x}`);
     flashbtn.classList.add(clr);
     setTimeout(() => {
         flashbtn.classList.remove(clr);
